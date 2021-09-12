@@ -22,19 +22,19 @@ public class UserController {
         int provider1Count = 0;
         int provider2Count = 0;
 
-        for (int i=0; i< 200;i++) {
-            ResponseEntity<JSONObject> responseEntity = restTemplate.getForEntity(
-                    "http://provider/user/message", JSONObject.class);
-            String result = (String) responseEntity.getBody().get("result");
-            if ("1".equals(result)) {
-                provider1Count++;
-            } else if ("2".equals(result)) {
-                provider2Count++;
-            }
-            log.info("result: {}", result);
-            log.info("provider1Count: {}", provider1Count);
-            log.info("provider1Count: {}", provider2Count);
+        ResponseEntity<JSONObject> responseEntity = restTemplate.getForEntity(
+                "http://provider/user/message", JSONObject.class);
+        String result = (String) responseEntity.getBody().get("result");
+        if ("1".equals(result)) {
+            provider1Count++;
+        } else if ("2".equals(result)) {
+            provider2Count++;
         }
+        log.info("result: {}", result);
+
+        log.info("provider1Count: {}", provider1Count);
+        log.info("provider1Count: {}", provider2Count);
+
         return "provider1Count: " + provider1Count + ", provider1Count: " + provider2Count;
 
     }

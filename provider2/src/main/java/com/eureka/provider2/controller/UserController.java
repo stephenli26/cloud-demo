@@ -12,11 +12,6 @@ public class UserController {
     @RequestMapping(value = "message")
     public Map<String, String> message() {
         Map<String, String> result  = new HashMap<>();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         result.put("result", "2");
         return result;
     }
