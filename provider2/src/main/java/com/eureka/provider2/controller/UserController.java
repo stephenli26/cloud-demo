@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Random;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     @RequestMapping(value = "message")
-    public Map<String, String> message(String dateStr) {
+    public Map<String, String> message(@RequestParam("dateStr")String dateStr) {
         Map<String, String> result  = new HashMap<>();
         result.put("result", "1");
         log.info("provider2, dateStr: {}, result: {}", dateStr, result);
@@ -22,7 +23,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "notice")
-    public Map<String, String> notice(String code) {
+    public Map<String, String> notice(@RequestParam("dateStr")String dateStr) {
         Map<String, String> result  = new HashMap<>();
         result.put("result", "This is provider2 notice");
         return result;

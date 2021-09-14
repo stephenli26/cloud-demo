@@ -18,8 +18,13 @@ public class UserController {
     @Autowired
     UserService service;
 
-    @GetMapping(value = "result")
-    public String getResult() {
-        return service.getResult();
+    @GetMapping(value = "message")
+    public String getMessage() {
+        return service.getMessage();
+    }
+
+    @GetMapping(value = "notice")
+    public String getNotice() {
+        return service.getNotice();
     }
 }

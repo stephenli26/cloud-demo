@@ -1,9 +1,13 @@
 package com.eureka.customer1.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,33 +16,47 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 @Slf4j
+@DefaultProperties(defaultFallback = "getError")
 public class UserService {
 
     @Autowired
     RestTemplate restTemplate;
 
-    @HystrixCommand(fallbackMethod = "getError"//commandKey = "userServiceGetResultKey"
+    @HystrixCommand(commandKey = "userServiceGetResultKey")
+    //(fallbackMethod = "getError"//commandKey = "userServiceGetResultKey"
 //        commandProperties = {
 //            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "4000")
 //        }
-    )
-    public String getResult() {
-
-        String result = "";
-        long startTime = System.currentTimeMillis();
-
-        long endTime = 0;
+    //)
+    public String getMessage() {
         Date date = new Date();
-        String dateStr = "20210914 " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        String url = "http://provider/user/message?dateStr={dateStr}";
+        return callMethod(url);
+    }
 
-        ResponseEntity<JSONObject> responseEntity = restTemplate.getForEntity(
-                "http://provider/user/message?dateStr=" + dateStr, JSONObject.class);
-        result = (String) responseEntity.getBody().get("result");
-        endTime = System.currentTimeMillis();
+    @HystrixCommand(commandKey = "userServiceGetResultKey")
+    public String getNotice() {
+        Date date = new Date();
+        String url = "http://provider/user/notice?dateStr={dateStr}";
+        return callMethod(url);
+    }
 
-
-        log.info("dateStr: {}, spent time: {}, result: {}", dateStr, endTime - startTime, result);
+    public String callMethod(String url) {
+        long startTime = System.currentTimeMillis();
+        Map<String, Object> paramMap = new HashMap<>();
+        String dateStr = getDate();
+        paramMap.put("dateStr", dateStr);
+        ResponseEntity<JSONObject> responseEntity = restTemplate.getForEntity(url,
+                JSONObject.class,
+                paramMap);
+        String result = (String) responseEntity.getBody().get("result");
+        long endTime = System.currentTimeMillis();
+        log.info("url: {}, param: {}, spent time: {}, result: {}", url, paramMap, endTime - startTime, result);
         return result;
+    }
+
+    public String getDate() {
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS").format(new Date());
     }
 
     public String getError() {
