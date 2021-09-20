@@ -12,7 +12,7 @@ class Customer1ApplicationTests {
     void contextLoads() {
 
 
-
+        
 
 //        JSONObject response = restTemplate.getForObject("http://provider/user/message",JSONObject.class);
 //        log.info("{}", response.get("result"));

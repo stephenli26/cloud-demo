@@ -21,7 +21,7 @@ public class UserController {
         long startTime = System.currentTimeMillis();
         try {
 
-            Thread.sleep(new Random().nextInt(3000));
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

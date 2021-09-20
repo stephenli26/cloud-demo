@@ -20,11 +20,16 @@ public class UserController {
 
     @GetMapping(value = "message")
     public String getMessage() {
-        return service.getMessage();
+        String result =  service.getMessage();
+        log.info("result: {}", result);
+        return result;
     }
 
     @GetMapping(value = "notice")
     public String getNotice() {
-        return service.getNotice();
+        String result =  service.getNotice();
+        log.info("result: {}", result);
+        System.out.println("get result: " +  result);
+        return result;
     }
 }
