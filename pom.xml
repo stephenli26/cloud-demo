@@ -21,5 +21,6 @@
     <module>provider2</module>
     <module>customer1</module>
     <module>customer2</module>
+    <module>dashboard</module>
   </modules>
 </project>

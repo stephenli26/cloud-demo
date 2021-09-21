@@ -21,7 +21,7 @@ public class UserController {
         long startTime = System.currentTimeMillis();
         try {
 
-            Thread.sleep(1000);
+            Thread.sleep(new Random().nextInt(3000));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -29,7 +29,7 @@ public class UserController {
         long endTime = System.currentTimeMillis();
 
         result.put("result", "1");
-        log.info("provider1 message, dateStr: {}, result: {}, spent time: {}", dateStr, result, endTime - startTime);
+//        log.info("provider1 message, dateStr: {}, result: {}, spent time: {}", dateStr, result, endTime - startTime);
 
         return result;
     }
@@ -48,7 +48,7 @@ public class UserController {
         long endTime = System.currentTimeMillis();
 
         result.put("result", "1");
-        log.info("provider1 notice , dateStr: {}, result: {}, spent time: {}", dateStr, result, endTime - startTime);
+//        log.info("provider1 notice , dateStr: {}, result: {}, spent time: {}", dateStr, result, endTime - startTime);
         return result;
     }
 }
