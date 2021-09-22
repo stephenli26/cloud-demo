@@ -23,6 +23,7 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
+    <!-- 早期版本的eureka自带ribbon, cloud 2020开始。cloud移除了eureka之外的所有netflix组件-->
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
