@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class UserController {
 
-    @RequestMapping(value = "message")
-    public Map<String, String> message(@RequestParam("dateStr")String dateStr) {
+    @RequestMapping(value = "message/{dateStr}")
+    public Map<String, String> message(@PathVariable("dateStr")  String dateStr) {
         Map<String, String> result  = new HashMap<>();
-        result.put("result", "1");
+        result.put("result", "2");
         log.info("provider2, dateStr: {}, result: {}", dateStr, result);
 
         return result;
