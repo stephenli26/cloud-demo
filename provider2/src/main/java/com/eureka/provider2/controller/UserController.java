@@ -18,6 +18,12 @@ public class UserController {
     public Map<String, String> message(@PathVariable("dateStr")  String dateStr) {
         Map<String, String> result  = new HashMap<>();
         result.put("result", "2");
+        try {
+
+            Thread.sleep(new Random().nextInt(4000));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         log.info("provider2, dateStr: {}, result: {}", dateStr, result);
 
         return result;

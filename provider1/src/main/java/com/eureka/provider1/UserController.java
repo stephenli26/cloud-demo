@@ -20,12 +20,12 @@ public class UserController {
     public Map<String, String> message(@PathVariable("dateStr")  String dateStr) {
         Map<String, String> result  = new HashMap<>();
         long startTime = System.currentTimeMillis();
-//        try {
-//
-//            Thread.sleep(new Random().nextInt(3000));
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        try {
+
+            Thread.sleep(new Random().nextInt(4000));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         long endTime = System.currentTimeMillis();
 
