@@ -1,0 +1,3 @@
+eureka
+ribbon
+hystrix
